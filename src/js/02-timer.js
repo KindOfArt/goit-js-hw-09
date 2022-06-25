@@ -17,7 +17,7 @@ const options = {
     if (selectedDates[0] <= options.defaultDate) {
       startBtnRef.disabled = true;
       return;
-    
+    }
     startBtnRef.addEventListener('click', () => {
       if (isActive) {
         return;
