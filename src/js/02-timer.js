@@ -1,4 +1,5 @@
 import Flatpickr from 'flatpickr';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import 'flatpickr/dist/flatpickr.min.css';
 import Notiflix from 'notiflix';
 
@@ -15,9 +16,11 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     if (selectedDates[0] <= options.defaultDate) {
+      Notify.failure('Please choose a date in the future');
       startBtnRef.disabled = true;
       return;
     }
+    Notify.success('Cool, you can to run the timer');
     startBtnRef.addEventListener('click', () => {
       if (isActive) {
         return;
