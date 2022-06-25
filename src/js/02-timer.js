@@ -26,6 +26,7 @@ const options = {
 
     startBtnRef.addEventListener('click', () => {
       if (isActive) {
+        Notify.warning('The timer already is active');
         return;
       }
       isActive = true;
