@@ -9,16 +9,17 @@ function onSubmitForm(e) {
 
   const elements = e.target.elements;
   const amountValue = elements.amount.value;
-  let delayValue = Number(elements.delay.value);
-  let stepValue = Number(elements.step.value);
+  const delayValue = Number(elements.delay.value);
+  const stepValue = Number(elements.step.value);
+  let delayStepCounter = 0;
   let promisePosition = 0;
 
   for (let i = 0; i < amountValue; i += 1) {
     promisePosition += 1;
 
-    delayValue += stepValue;
+    delayStepCounter = delayValue + stepValue * i;
 
-    createPromise(promisePosition, delayValue)
+    createPromise(promisePosition, delayStepCounter)
       .then(successMessage => {
         Notify.success(successMessage);
       })
