@@ -3,6 +3,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import 'flatpickr/dist/flatpickr.min.css';
 
 const startBtnRef = document.querySelector('[data-start]');
+const inputRef = document.querySelector('#datetime-picker');
 startBtnRef.disabled = true;
 
 let isActive = false;
@@ -25,11 +26,10 @@ const options = {
     Notify.success('Cool, now you can to run the timer');
 
     startBtnRef.addEventListener('click', () => {
-      if (isActive) {
-        Notify.warning('The timer already is active');
-        return;
-      }
       isActive = true;
+
+      startBtnRef.disabled = true;
+      inputRef.disabled = true;
 
       const futureTime = selectedDates[0].getTime();
 
@@ -40,7 +40,12 @@ const options = {
 
         if (deltaTime <= 0) {
           clearInterval(intervalId);
+
           isActive = false;
+
+          startBtnRef.disabled = false;
+          inputRef.disabled = false;
+
           return;
         }
 
@@ -50,7 +55,6 @@ const options = {
         });
       }, 1000);
     });
-
     startBtnRef.disabled = false;
   },
 };
